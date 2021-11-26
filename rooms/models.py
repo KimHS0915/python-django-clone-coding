@@ -83,6 +83,8 @@ class Room(AbstractTimeStampedModel):
 
     def total_rating(self):
         all_reviews = self.reviews.all()
+        if not all_reviews:
+            return None
         all_ratings = 0
         for review in all_reviews:
             all_ratings += review.rating_average()
