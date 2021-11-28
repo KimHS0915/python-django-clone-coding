@@ -3,7 +3,7 @@ from rooms.models import Amenity
 
 
 class Command(BaseCommand):
-    """ Command Create/Delete Amenities """
+    """ Command Create/Delete amenities """
 
     help = 'This Command create or delete amenities'
 
@@ -69,7 +69,7 @@ class Command(BaseCommand):
             for i in amenities:
                 if not Amenity.objects.filter(name=i):
                     Amenity.objects.create(name=i)
-            self.stdout.write(self.style.SUCCESS('Amenities created!'))
+            self.stdout.write(self.style.SUCCESS(f'{len(amenities)} amenities created!'))
 
         elif options['delete']:
             Amenity.objects.all().delete()
