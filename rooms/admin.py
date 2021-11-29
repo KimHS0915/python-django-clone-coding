@@ -22,6 +22,7 @@ class RoomAdmin(admin.ModelAdmin):
                 'city',
                 'address',
                 'price',
+                'room_type',
             ),
         }),
         ('Times', {
@@ -59,7 +60,6 @@ class RoomAdmin(admin.ModelAdmin):
     
     list_display = (
         'name',
-        'description',
         'country',
         'city',
         'price',
@@ -100,8 +100,12 @@ class RoomAdmin(admin.ModelAdmin):
     def count_amenities(self, obj):
         return obj.amenities.count()
 
+    count_amenities.short_description = 'Amenity Count'
+
     def count_photos(self, obj):
         return obj.photos.count()
+    
+    count_photos.short_description = 'Photo Count'
 
 
 @admin.register(models.RoomType, models.Amenity, models.Facility, models.HouseRule)
