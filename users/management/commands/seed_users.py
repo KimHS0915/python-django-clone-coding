@@ -10,16 +10,29 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
+            '--delete',
+            action='store_true',
+            help='Delete users'
+        )
+        parser.add_argument(
             '--number',
-            default=1,
             type=int,
             help='How many users you want to create'
         )
 
-
     def handle(self, *args, **options):
-        number = options.get('number')
-        seeder = Seed.seeder()
-        seeder.add_entity(User, number, {'is_staff': False, 'is_superuser': False})
-        seeder.execute()
-        self.stdout.write(self.style.SUCCESS(f'{number} users created!'))
+        if options['number']:
+            number = options.get('number')
+            seeder = Seed.seeder()
+            seeder.add_entity(User, number, {'is_staff': False, 'is_superuser': False})
+            seeder.execute()
+            self.stdout.write(self.style.SUCCESS(f'{number} users created!'))
+        
+        elif options['delete']:
+            users = User.objects.filter(is_superuser=False)
+            number = len(users)
+            users.delete()
+            self.stdout.write(self.style.SUCCESS(f'{number} users deleted!'))
+
+        else:
+            self.stdout.write(self.style.ERROR('Options are not given. (--number NUMBER or --delete)'))
