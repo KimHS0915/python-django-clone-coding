@@ -2,7 +2,7 @@ from django.db import models
 from common.models import AbstractTimeStampedModel
 
 # Create your models here.
-class Reviews(AbstractTimeStampedModel):
+class Review(AbstractTimeStampedModel):
     """ Review Model Definition """
 
     review = models.TextField()
