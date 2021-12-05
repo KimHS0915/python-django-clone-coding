@@ -1,16 +1,20 @@
 from math import ceil
 from django.core import paginator
-from django.shortcuts import render
-from django.core.paginator import Paginator
+from django.shortcuts import redirect, render
+from django.core.paginator import EmptyPage, Paginator
 from . import models
 
 
 def all_rooms(request):
-    page = request.GET.get('page')
+    page = request.GET.get('page', 1)
     room_list = models.Room.objects.all()
-    paginator = Paginator(room_list, 10)
-    rooms = paginator.get_page(page)
-    return render(request, 'rooms/home.html', context={'page': rooms})
+    paginator = Paginator(room_list, 10, orphans=3)
+    try:
+        rooms = paginator.page(int(page))
+        return render(request, 'rooms/home.html', context={'page': rooms})
+    except EmptyPage:
+        rooms = paginator.page(1)
+        return redirect('/')
 
 
 # def all_rooms(request):
