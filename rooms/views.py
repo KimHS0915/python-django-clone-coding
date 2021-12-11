@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from . import models
 from . import forms
 
@@ -28,67 +28,70 @@ class RoomDetailView(DetailView):
     model = models.Room
 
 
-def search(request):
+class SearchView(View):
+    """ SearchView Definition """
 
-    country = request.GET.get('country')
+    def get(self, request):
 
-    if country:
-        form = forms.SearchForm(request.GET)
-        if form.is_valid():
-            city = form.cleaned_data.get('city')
-            country = form.cleaned_data.get('country')
-            room_type = form.cleaned_data.get('room_type')
-            price = form.cleaned_data.get('price')
-            guests = form.cleaned_data.get('guests')
-            bedrooms = form.cleaned_data.get('bedrooms')
-            beds = form.cleaned_data.get('beds')
-            baths = form.cleaned_data.get('baths')
-            instant_book = form.cleaned_data.get('instant_book')
-            superhost = form.cleaned_data.get('superhos')
-            amenities = form.cleaned_data.get('amenities')
-            facilities = form.cleaned_data.get('facilities')
+        country = request.GET.get('country')
 
-            filter_args = {}
+        if country:
+            form = forms.SearchForm(request.GET)
+            if form.is_valid():
+                city = form.cleaned_data.get('city')
+                country = form.cleaned_data.get('country')
+                room_type = form.cleaned_data.get('room_type')
+                price = form.cleaned_data.get('price')
+                guests = form.cleaned_data.get('guests')
+                bedrooms = form.cleaned_data.get('bedrooms')
+                beds = form.cleaned_data.get('beds')
+                baths = form.cleaned_data.get('baths')
+                instant_book = form.cleaned_data.get('instant_book')
+                superhost = form.cleaned_data.get('superhos')
+                amenities = form.cleaned_data.get('amenities')
+                facilities = form.cleaned_data.get('facilities')
 
-            if city:
-                filter_args['city__startswith'] = city
+                filter_args = {}
 
-            filter_args['country'] = country
+                if city:
+                    filter_args['city__startswith'] = city
 
-            if room_type:
-                filter_args['room_type'] = room_type
+                filter_args['country'] = country
 
-            if price:
-                filter_args['price__lte'] = price
+                if room_type:
+                    filter_args['room_type'] = room_type
 
-            if guests:
-                filter_args['guests__gte'] = guests
+                if price:
+                    filter_args['price__lte'] = price
 
-            if bedrooms:
-                filter_args['bedrooms__gte'] = guests
+                if guests:
+                    filter_args['guests__gte'] = guests
 
-            if beds:
-                filter_args['beds__gte'] = guests
+                if bedrooms:
+                    filter_args['bedrooms__gte'] = guests
 
-            if baths:
-                filter_args['baths__gte'] = guests
+                if beds:
+                    filter_args['beds__gte'] = guests
 
-            if instant_book:
-                filter_args['instant_book'] = True
+                if baths:
+                    filter_args['baths__gte'] = guests
 
-            if superhost:
-                filter_args['host__superhost'] = True
+                if instant_book:
+                    filter_args['instant_book'] = True
 
-            rooms = models.Room.objects.filter(**filter_args)
+                if superhost:
+                    filter_args['host__superhost'] = True
 
-            for amenity in amenities:
-                rooms = rooms.filter(amenities=amenity)
+                rooms = models.Room.objects.filter(**filter_args)
 
-            for facility in facilities:
-                rooms = rooms.filter(facilities=facility)
+                for amenity in amenities:
+                    rooms = rooms.filter(amenities=amenity)
 
-            return render(request, "rooms/search.html", context={'form': form, 'rooms': rooms})
-    else:
-        form = forms.SearchForm()
+                for facility in facilities:
+                    rooms = rooms.filter(facilities=facility)
 
-    return render(request, "rooms/search.html", context={'form': form})
+                return render(request, "rooms/search.html", context={'form': form, 'rooms': rooms})
+        else:
+            form = forms.SearchForm()
+
+        return render(request, "rooms/search.html", context={'form': form})
