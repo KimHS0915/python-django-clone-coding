@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, View
+from django.core.paginator import Paginator
 from . import models
 from . import forms
 
@@ -82,15 +83,23 @@ class SearchView(View):
                 if superhost:
                     filter_args['host__superhost'] = True
 
-                rooms = models.Room.objects.filter(**filter_args)
+                qs = models.Room.objects.filter(
+                    **filter_args).order_by('-created')
 
                 for amenity in amenities:
-                    rooms = rooms.filter(amenities=amenity)
+                    qs = qs.filter(amenities=amenity)
 
                 for facility in facilities:
-                    rooms = rooms.filter(facilities=facility)
+                    qs = qs.filter(facilities=facility)
 
-                return render(request, "rooms/search.html", context={'form': form, 'rooms': rooms})
+                page = request.GET.get('page')
+                paginator = Paginator(qs, 5, orphans=5)
+                rooms = paginator.get_page(page)
+                path = request.get_full_path().split(
+                    '&page=')[0].replace('/rooms/search/?', '')
+
+                return render(request, "rooms/search.html", context={
+                    'form': form, 'rooms': rooms, 'path': path})
         else:
             form = forms.SearchForm()
 

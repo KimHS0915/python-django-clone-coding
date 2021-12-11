@@ -14,8 +14,22 @@
         {{ form.as_p }}
         <button>Search</button>
     </form>
-    <h3>Results</h3>
-    {% for room in rooms %}
-        <h3>{{ room.name }}</h3>
-    {% endfor %}
+    {% if rooms %}
+        <h3>Results</h3>
+        {% for room in rooms %}
+            <h3>{{ room.name }}</h3>
+        {% endfor %}
+        <h5>
+            {% if rooms.has_previous %}
+                <a href='?{{ path }}&page={{ rooms.previous_page_number }}'>Previous</a>
+            {% endif %}
+            Page {{ rooms.number }} of {{ rooms.paginator.num_pages }}
+            {% if rooms.has_next %}
+                <a href='?{{ path }}&page={{ rooms.next_page_number }}'>Next</a>
+            {% endif %}
+        </h5>
+        {% for page in rooms.paginator.page_range %}
+            <a href='?{{ path }}&page={{ page }}'>{{ page }}</a>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
