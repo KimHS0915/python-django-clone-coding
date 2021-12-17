@@ -3,25 +3,27 @@ from django.contrib.auth.admin import UserAdmin
 from . import models
 
 # Register your models here.
+
+
 @admin.register(models.User)
 class UserAdmin(UserAdmin):
     """ Custom User Admin """
-    
+
     custom_fieldsets = (
         ('Custom', {
             "fields": (
-                'avatar', 
-                'bio', 
-                'birthdate', 
-                'currency', 
-                'gender', 
-                'language', 
+                'avatar',
+                'bio',
+                'birthdate',
+                'currency',
+                'gender',
+                'language',
                 'superhost',
             ),
         }),
     )
     fieldsets = UserAdmin.fieldsets + custom_fieldsets
-    
+
     list_filter = UserAdmin.list_filter + ('superhost',)
 
     list_display = (
@@ -35,4 +37,6 @@ class UserAdmin(UserAdmin):
         'superhost',
         'is_staff',
         'is_superuser',
+        'email_verified',
+        'email_secret',
     )
