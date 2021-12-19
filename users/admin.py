@@ -19,6 +19,7 @@ class UserAdmin(UserAdmin):
                 'gender',
                 'language',
                 'superhost',
+                'login_method',
             ),
         }),
     )
@@ -39,4 +40,5 @@ class UserAdmin(UserAdmin):
         'is_superuser',
         'email_verified',
         'email_secret',
+        'login_method',
     )
