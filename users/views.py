@@ -101,9 +101,14 @@ def github_callback(request):
                         user = models.User.objects.create(
                             email=email,
                             first_name=name,
-                            username=email, bio=bio,
+                            username=email,
+                            bio=bio,
                             login_method=models.User.LOGIN_GITHUB,
                         )
+                        if name is not None:
+                            user.name = name
+                        if bio is not None:
+                            user.bio = bio
                         user.set_unusable_password()
                         user.save()
                     login(request, user)
@@ -112,5 +117,5 @@ def github_callback(request):
                     raise GithubException()
         else:
             raise GithubException()
-    except Exception:
+    except GithubException():
         return redirect(reverse('users:login'))
