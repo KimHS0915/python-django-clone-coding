@@ -14,19 +14,24 @@ class User(AbstractUser):
     GENDER_MALE = 'male'
     GENDER_FEMALE = 'female'
     GENDER_OTHER = 'other'
+
     GENDER_CHOICES = (
         (GENDER_MALE, 'male'),
         (GENDER_FEMALE, 'female'),
         (GENDER_OTHER, 'other'),
     )
+
     LANGUAGE_ENGLISH = 'en'
     LANGUAGE_KOREAN = 'kr'
+
     LANGUAGE_CHOICES = (
         (LANGUAGE_ENGLISH, 'english'),
         (LANGUAGE_KOREAN, 'korean'),
     )
+
     CURRENCY_USD = 'usd'
     CURRENCY_KRW = 'krw'
+
     CURRENCY_CHOICES = (
         (CURRENCY_USD, 'USD'),
         (CURRENCY_KRW, 'KRW'),
@@ -34,10 +39,12 @@ class User(AbstractUser):
 
     LOGIN_EMAIL = 'email'
     LOGIN_GITHUB = 'github'
+    LOGIN_KAKAO = 'kakao'
 
     LOGIN_CHOICES = (
         (LOGIN_EMAIL, 'Email'),
         (LOGIN_GITHUB, 'Github'),
+        (LOGIN_KAKAO, 'Kakao'),
     )
 
     avatar = models.ImageField(upload_to='avatars', blank=True)
