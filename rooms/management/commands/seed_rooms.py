@@ -19,7 +19,6 @@ class Command(BaseCommand):
             help='How many rooms you want to create'
         )
 
-
     def handle(self, *args, **options):
         number = options.get('number')
         seeder = Seed.seeder()
@@ -38,13 +37,13 @@ class Command(BaseCommand):
                 'beds': lambda x: random.randint(1, 5),
                 'bedrooms': lambda x: random.randint(1, 5),
                 'baths': lambda x: random.randint(1, 5),
-                }
+            }
         )
         created_rooms = seeder.execute()
         created_clean = flatten(list(created_rooms.values()))
         for pk in created_clean:
             room = Room.objects.get(pk=pk)
-            for i in range(3, random.randint(10, 30)):
+            for i in range(3, random.randint(5, 10)):
                 Photo.objects.create(
                     caption=seeder.faker.sentence(),
                     room=room,
@@ -61,5 +60,5 @@ class Command(BaseCommand):
             for rule in rules:
                 magic_number = random.randint(0, 15)
                 if magic_number % 2 == 0:
-                    room.house_rules.add(rule)  
+                    room.house_rules.add(rule)
         self.stdout.write(self.style.SUCCESS(f'{number} rooms created!'))
