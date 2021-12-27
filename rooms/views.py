@@ -1,4 +1,3 @@
-from django.utils import timezone
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator
@@ -15,12 +14,6 @@ class HomeView(ListView):
     ordering = 'created'
     context_object_name = 'rooms'
     template_name = 'rooms/home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        now = timezone.now()
-        context['now'] = now
-        return context
 
 
 class RoomDetailView(DetailView):
