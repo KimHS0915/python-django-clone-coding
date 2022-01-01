@@ -1,12 +1,15 @@
 from django import forms
+from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm
 from . import models
 
 
 class LoginForm(forms.Form):
 
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(widget=forms.EmailInput(
+        attrs={'placeholder': 'Email'}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'placeholder': 'Password'}))
 
     def clean(self):
         email = self.cleaned_data.get('email')
@@ -25,9 +28,40 @@ class LoginForm(forms.Form):
 
 class SignUpForm(UserCreationForm):
 
+    password1 = forms.CharField(
+        label=("Password"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={'autocomplete': 'new-password', 'placeholder': 'Password'}),
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    password2 = forms.CharField(
+        label=("Password confirmation"),
+        widget=forms.PasswordInput(
+            attrs={'autocomplete': 'new-password', 'placeholder': 'Confirm Password'}),
+        strip=False,
+        help_text=("Enter the same password as before, for verification."),
+    )
+
     class Meta:
         model = models.User
-        fields = ('first_name', 'last_name', 'email', 'language')
+        fields = ('language', 'first_name', 'last_name', 'email')
+        widgets = {
+            'language': forms.Select(attrs={'placeholder': 'Language'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'First name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last name'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Email'}),
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        try:
+            models.User.objects.get(email=email)
+            raise forms.ValidationError(
+                'That email is already raken', code='existing_user'
+            )
+        except models.User.DoesNotExist:
+            return email
 
     def save(self, *args, **kwargs):
         user = super().save(commit=False)

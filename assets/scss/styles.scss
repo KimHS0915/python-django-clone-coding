@@ -26,4 +26,18 @@ input {
   }
 }
 
+form {
+  .input {
+    @apply mb-2;
+    &.has_error {
+      input {
+        @apply bg-red-200 border-red-200;
+        &:focus {
+          @apply border-red-200;
+        }
+      }
+    }
+  }
+}
+
 @tailwind utilities;
