@@ -224,7 +224,26 @@ class UpdateProfileView(UpdateView):
         self.object.save()
         return super().form_valid(form)
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields['email'].widget.attrs = {'placeholder': 'email'}
+        form.fields['first_name'].widget.attrs = {'placeholder': 'first_name'}
+        form.fields['last_name'].widget.attrs = {'placeholder': 'last_name'}
+        form.fields['bio'].widget.attrs = {'placeholder': 'Bio'}
+        form.fields['birthdate'].widget.attrs = {'placeholder': 'Birthdate'}
+        return form
+
 
 class UpdatePasswordView(PasswordChangeView):
 
     template_name = 'users/update_password.html'
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields['old_password'].widget.attrs = {
+            'placeholder': 'Current password'}
+        form.fields['new_password1'].widget.attrs = {
+            'placeholder': 'New password'}
+        form.fields['new_password2'].widget.attrs = {
+            'placeholder': 'Confirm new password'}
+        return form
