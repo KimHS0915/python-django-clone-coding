@@ -2,7 +2,7 @@ from django.contrib.messages.api import success
 from django.http.response import Http404
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView, View
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import FormView, UpdateView
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -170,7 +170,6 @@ class EditPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateVie
     model = models.Photo
     template_name = 'rooms/photo_edit.html'
     pk_url_kwarg = 'photo_pk'
-    success_message = 'Photo Updated'
     fields = ('caption',)
 
     def get_success_url(self):
@@ -182,3 +181,20 @@ class EditPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateVie
         if photo.room.host.pk != self.request.user.pk:
             raise Http404()
         return photo
+
+
+class AddPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, FormView):
+
+    model = models.Photo
+    template_name = 'rooms/photo_create.html'
+    fields = (
+        'caption',
+        'file',
+    )
+    form_class = forms.CreatePhotoForm
+
+    def form_valid(self, form):
+        pk = self.kwargs.get('pk')
+        form.save(pk)
+        messages.success(self.request, 'Photo Uploaded')
+        return redirect(reverse('rooms:photos', kwargs={'pk': pk}))
