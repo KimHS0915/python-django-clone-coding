@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
 from common.models import AbstractTimeStampedModel
-
+from my_calendar import Calendar
 # Create your models here.
 
 
@@ -114,3 +114,8 @@ class Room(AbstractTimeStampedModel):
     def get_next_four_photos(self):
         photos = self.photos.all()[1:5]
         return photos
+
+    def get_calendars(self):
+        this_month = Calendar(2019, 11)
+        next_month = Calendar(2019, 12)
+        return [this_month, next_month]
