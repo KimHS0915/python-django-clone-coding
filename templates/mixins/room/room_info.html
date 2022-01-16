@@ -1,0 +1,44 @@
+<div class='flex justify-between'>
+    <div class='mb-5'>
+        <h4 class='text-3xl font-medium mb-px'>
+            {{ room.name }}
+        </h4>
+        <span class='text-gray-700 font-light'>
+            {{ room.city }}
+        </span>
+    </div>
+    <a href='{{ room.host.get_absolute_url }}' class='flex flex-col items-center'>
+        {% include 'mixins/user_avatar.html' with user=room.host %}
+        <span class='mt-2 text-gray-500'>
+            {{ room.host.first_name }}
+        </span>
+    </a>
+</div>
+<div class="flex border-section">
+    <span class='mr-5 font_light'>{{ room.room_type }}</span>
+    <span class='mr-5 font_light'>{{ room.beds }} bed{{ room.beds|pluralize }}</span>
+    <span class='mr-5 font_light'>{{ room.bedrooms }} bedroom{{ room.bedrooms|pluralize }}</span>
+    <span class='mr-5 font_light'>{{ room.baths }} baths{{ room.baths|pluralize }}</span>
+    <span class='mr-5 font_light'>{{ room.guests }} guest{{ room.guests|pluralize }}</span>
+</div>
+<p class='border-section'>
+    {{ room.description }}
+</p>
+<div class='border-section'>
+    <h4 class='font-medium text-lg mb-5'>Amenities</h4>
+    {% for amenity in room.amenities.all %}
+        <li class='mb-2'>{{ amenity }}</li>
+    {% endfor %}
+</div>
+<div class='border-section'>
+    <h4 class='font-medium text-lg mb-5'>Facilities</h4>
+    {% for facility in room.facilities.all %}
+        <li class='mb-2'>{{ facility }}</li>
+    {% endfor %}
+</div>
+<div class='border-section'>
+    <h4 class='font-medium text-lg mb-5'>House Rules</h4>
+    {% for house_rule in room.house_rules.all %}
+        <li class='mb-2'>{{ house_rule }}</li>
+    {% endfor %}
+</div>

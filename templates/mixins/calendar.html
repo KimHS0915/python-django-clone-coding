@@ -9,20 +9,20 @@
             {% endfor %}
         </div>
         <div class='cal-grid'>
-            {% for day in calendar.get_days %}                                    
-                {% if day.number != 0 %}                                        
+            {% for day in calendar.get_days %}
+                {% if day.number != 0 %}
                     {% if day.past %}
-                        <span class="rounded bg-gray-200 w-full text-center p-1 text-gray-300">
+                        <span class="cal-number bg-gray-200 text-gray-400">
                             {{ day }}
                         </span>
                     {% else %}
-                        <span class='bg-gray-200 w-full text-center rounded text-gray-700 p-1 hover:bg-teal-400 hover:text-white hover:font-medium cursor-pointer'>
+                        <span class='cal-number bg-gray-200 text-gray-700 hover:bg-teal-400 hover:text-white hover:font-medium'>
                             {{ day }}
-                        </span>                                
-                    {% endif %}                                            
+                        </span>
+                    {% endif %}
                 {% else %}
                     <span></span>
-                {% endif %}                                    
+                {% endif %}
             {% endfor %}
         </div>
     </div>
