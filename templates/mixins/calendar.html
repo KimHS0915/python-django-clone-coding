@@ -1,3 +1,5 @@
+{% load is_between %}
+
 {% for calendar in calendars %}
     <div class='mb-20'>
         <span class='text-center font-semibold text-lg block mb-8'>
@@ -10,9 +12,14 @@
         </div>
         <div class='cal-grid'>
             {% for day in calendar.get_days %}
+                {% is_between room day as is_between_bool %}
                 {% if day.number != 0 %}
                     {% if day.past %}
                         <span class="cal-number bg-gray-200 text-gray-400">
+                            {{ day }}
+                        </span>
+                    {% elif is_between_bool %}
+                        <span class='cal-number bg-gray-200 text-gray-400 line-through'>
                             {{ day }}
                         </span>
                     {% else %}

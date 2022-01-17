@@ -1,8 +1,22 @@
+import datetime
 from django.db import models
 from django.utils import timezone
 from common.models import AbstractTimeStampedModel
 
-# Create your models here.
+
+class BetweenDay(AbstractTimeStampedModel):
+
+    day = models.DateField()
+    reservation = models.ForeignKey('Reservation', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Between Day'
+        verbose_name_plural = 'Between Days'
+
+    def __str__(self):
+        return str(self.day)
+
+
 class Reservation(AbstractTimeStampedModel):
     """ Reservation Model Definition """
 
@@ -30,7 +44,7 @@ class Reservation(AbstractTimeStampedModel):
     def in_progress(self):
         now = timezone.now().date()
         return now >= self.check_in and now <= self.check_out
-    
+
     in_progress.boolean = True
 
     def is_finished(self):
@@ -38,3 +52,19 @@ class Reservation(AbstractTimeStampedModel):
         return now > self.check_out
 
     is_finished.boolean = True
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            start = self.check_in
+            end = self.check_out
+            difference = end - start
+            existing_between_day = BetweenDay.objects.filter(
+                reservation__room=self.room, day__range=(start, end)).exists()
+            if existing_between_day == False:
+                super().save(*args, **kwargs)
+                for i in range(difference.days + 1):
+                    day = start + datetime.timedelta(days=i)
+                    BetweenDay.objects.create(day=day, reservation=self)
+                return
+        else:
+            return super().save(*args, **kwargs)
