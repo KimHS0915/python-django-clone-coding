@@ -1,6 +1,6 @@
 {% load is_between %}
 
-{% for calendar in calendars %}
+{% for calendar in room.get_calendars %}
     <div class='mb-20'>
         <span class='text-center font-semibold text-lg block mb-8'>
             {{ calendar.get_month }} / {{ calendar.year }}
@@ -23,9 +23,9 @@
                             {{ day }}
                         </span>
                     {% else %}
-                        <span class='cal-number bg-gray-200 text-gray-700 hover:bg-teal-400 hover:text-white hover:font-medium'>
+                        <a href={% url 'reservations:create' room.pk day.year day.month day.number %} class='cal-number bg-gray-200 text-gray-700 hover:bg-teal-400 hover:text-white hover:font-medium'>
                             {{ day }}
-                        </span>
+                        </a>
                     {% endif %}
                 {% else %}
                     <span></span>

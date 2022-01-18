@@ -18,7 +18,7 @@
                 <a href='{% url "rooms:edit" room.pk %}' class='btn-link block'>Edit Room</a>
             {% else %}
                 {% if not request.session.is_hosting %}
-                    {% include 'mixins/calendar.html' with calendars=room.get_calendars %}
+                    {% include 'mixins/calendar.html' with room=room %}
                 {% endif %}
             {% endif %}
         </div>
