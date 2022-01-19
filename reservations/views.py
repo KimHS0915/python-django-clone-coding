@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views.generic import View
 from rooms.models import Room
 from . import models
+import reservations
 
 
 class CreateError(Exception):
@@ -46,3 +47,20 @@ class ReservationDetailView(View):
             'reservations/detail.html',
             {'reservation': reservation},
         )
+
+
+def edit_reservation(request, pk, verb):
+    reservation = models.Reservation.objects.get_or_none(pk=pk)
+    if not reservation or (
+        reservation.guest != request.user
+        and reservation.room.host != request.user
+    ):
+        raise Http404()
+    if verb == 'confirm':
+        reservation.status = models.Reservation.STATUS_CONFIRMED
+    elif verb == 'cancel':
+        reservation.status = models.Reservation.STATUS_CANCELED
+        models.BetweenDay.objects.filter(reservation=reservation).delete()
+    reservation.save()
+    messages.success(request, 'Reservation Updated')
+    return redirect(reverse('reservations:detail', kwargs={'pk': reservation.pk}))
