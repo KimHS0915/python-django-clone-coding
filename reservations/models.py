@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from common.models import AbstractTimeStampedModel
+from . import managers
 
 
 class BetweenDay(AbstractTimeStampedModel):
@@ -37,6 +38,7 @@ class Reservation(AbstractTimeStampedModel):
         'users.User', related_name='reservations', on_delete=models.CASCADE)
     room = models.ForeignKey(
         'rooms.Room', related_name='reservations', on_delete=models.CASCADE)
+    objects = managers.CustomReservationManager()
 
     def __str__(self):
         return f'{self.room} - {self.check_in}'
