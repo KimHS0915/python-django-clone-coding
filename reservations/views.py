@@ -5,8 +5,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import View
 from rooms.models import Room
+from reviews.forms import CreateReviewForm
 from . import models
-import reservations
 
 
 class CreateError(Exception):
@@ -42,10 +42,14 @@ class ReservationDetailView(View):
             and reservation.room.host != self.request.user
         ):
             raise Http404()
+        form = CreateReviewForm()
         return render(
             self.request,
             'reservations/detail.html',
-            {'reservation': reservation},
+            {
+                'reservation': reservation,
+                'form': form,
+            },
         )
 
 

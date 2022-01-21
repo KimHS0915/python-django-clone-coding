@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from common.models import AbstractTimeStampedModel
 from . import managers
+import reservations
 
 
 class BetweenDay(AbstractTimeStampedModel):
@@ -51,7 +52,10 @@ class Reservation(AbstractTimeStampedModel):
 
     def is_finished(self):
         now = timezone.now().date()
-        return now > self.check_out
+        is_finished = now > self.check_out
+        if is_finished:
+            BetweenDay.objects.filter(reservation=self).delete()
+        return is_finished
 
     is_finished.boolean = True
 
