@@ -2,6 +2,8 @@ from django.db import models
 from common.models import AbstractTimeStampedModel
 
 # Create your models here.
+
+
 class Review(AbstractTimeStampedModel):
     """ Review Model Definition """
 
@@ -21,8 +23,11 @@ class Review(AbstractTimeStampedModel):
         return f'{self.review} - {self.room}'
 
     def rating_average(self):
-        avg = (self.accuracy + self.communication + self.cleanliness \
-            + self.location + self.check_in + self.value) / 6
+        avg = (self.accuracy + self.communication + self.cleanliness
+               + self.location + self.check_in + self.value) / 6
         return round(avg, 1)
 
     rating_average.short_description = 'Average'
+
+    class Meta:
+        ordering = ('-created',)
