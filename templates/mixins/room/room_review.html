@@ -21,8 +21,13 @@
                     <span class='font-medium'>{{ review.user.first_name }}</span>
                     <span class='text-sm text-gray-500'>{{ review.created|date:'F Y' }}</span>
                 </div>
+                {% if request.user == review.user %}
+                    <a href="{% url 'reviews:delete' room.pk review.pk %}">
+                        <i class="fas fa-times ml-2 text-red-600"></i>
+                    </a>
+                {% endif %}
             </div>
             <p>{{ review.review }}</p>
-        </div>                        
+        </div>
     {% endfor %}
 </div>
