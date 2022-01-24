@@ -1,15 +1,16 @@
+from mysite import settings
 import os
-import requests
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import FormView, DetailView, UpdateView
 from django.urls import reverse, reverse_lazy
+from django.utils import translation
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
-
 from . import forms, models, mixins
 
 
@@ -275,3 +276,11 @@ def switch_hosting(request):
     except KeyError:
         request.session['is_hosting'] = True
     return redirect(reverse('common:home'))
+
+
+def switch_language(request):
+    lang = request.GET.get('lang', None)
+    response = HttpResponse(status=200)
+    if lang is not None:
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+    return response
