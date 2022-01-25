@@ -1,16 +1,15 @@
-from mysite import settings
 import os
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import FormView, DetailView, UpdateView
 from django.urls import reverse, reverse_lazy
-from django.utils import translation
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
+from mysite import settings
 from . import forms, models, mixins
 
 

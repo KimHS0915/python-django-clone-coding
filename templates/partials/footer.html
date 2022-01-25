@@ -1,18 +1,23 @@
 {% load i18n %}
 
-<footer class='container mx-auto text-center py-3 border-t font-medium text-gray-400'>
+<footer class='container mx-auto text-center py-3 border-t font-medium text-gray-500'>
     <div class='flex flex-row'>
         <div class='flex-auto text-left mt-5'>
-            &copy; 2022 clonebnb, Inc.
+            <span>&copy; 2022 Clonebnb, Inc.</span>
+            <span class='ml-2'>· <a href="#">{% trans 'Privacy Policy' %}</a></span>
+            <span class='ml-2'>· <a href="#">{% trans 'Terms' %}</a></span>
+            <span class='ml-2'>· <a href="#">{% trans 'Sitemaps' %}</a></span>
+            <span class='ml-2'>· <a href="#">{% trans 'Cancellation Policies' %}</a></span>
+            <span class='ml-2'>· <a href="#">{% trans 'Company Details' %}</a></span>
         </div>
         <div class='flex-auto text-right'>
             {% get_current_language as LANGUAGE_CODE %}
-            <select class='w-2/5 text-gray-600' id='lang-selector'>
+            <select class='w-2/5 text-gray-800' id='lang-selector'>
                 <option value='en' {% if LANGUAGE_CODE == 'en' %} selected {% endif %}>
-                    English
+                    {% trans 'English' %}
                 </option>
                 <option value='ko' {% if LANGUAGE_CODE == 'ko' %} selected {% endif %}>
-                    Korean
+                    {% trans 'Korean' %}
                 </option>
             </select>
         </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-24 03:05+0900\n"
+"POT-Creation-Date: 2022-01-25 20:07+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,3 +21,108 @@ msgstr ""
 #: .\templates\base.html:25
 msgid "Search by City"
 msgstr "도시로 찾기"
+
+#: .\templates\partials\footer.html:7
+msgid "Privacy Policy"
+msgstr "개인정보 처리방침"
+
+#: .\templates\partials\footer.html:8
+msgid "Terms"
+msgstr "이용약관"
+
+#: .\templates\partials\footer.html:9
+msgid "Sitemaps"
+msgstr "사이트맵"
+
+#: .\templates\partials\footer.html:10
+msgid "Cancellation Policies"
+msgstr "환불 정책"
+
+#: .\templates\partials\footer.html:11
+msgid "Company Details"
+msgstr "회사 세부정보"
+
+#: .\templates\partials\footer.html:17 .\users\models.py:29
+msgid "English"
+msgstr "영어"
+
+#: .\templates\partials\footer.html:20 .\users\models.py:30
+msgid "Korean"
+msgstr "한국어"
+
+#: .\templates\rooms\home.html:24
+#, python-format
+msgid "Page %(current_page)s of %(total_page)s"
+msgstr "페이지 %(current_page)s of %(total_page)s"
+
+#: .\users\mixins.py:14 .\users\mixins.py:26
+msgid "Can't go there"
+msgstr "갈 수 없습니다"
+
+#: .\users\models.py:20
+msgid "Male"
+msgstr "남성"
+
+#: .\users\models.py:21
+msgid "Female"
+msgstr "여성"
+
+#: .\users\models.py:22
+msgid "Other"
+msgstr "그 외"
+
+#: .\users\models.py:37
+msgid "USD"
+msgstr "달러"
+
+#: .\users\models.py:38
+msgid "KRW"
+msgstr "원"
+
+#: .\users\models.py:46
+msgid "Email"
+msgstr "이메일"
+
+#: .\users\models.py:47
+msgid "Github"
+msgstr "깃허브"
+
+#: .\users\models.py:48
+msgid "Kakao"
+msgstr "카카오"
+
+#: .\users\models.py:51
+msgid "avatar"
+msgstr "아바타"
+
+#: .\users\models.py:53
+msgid "gender"
+msgstr "성별"
+
+#: .\users\models.py:54
+msgid "bio"
+msgstr "바이오"
+
+#: .\users\models.py:55
+msgid "birthdate"
+msgstr "생년월일"
+
+#: .\users\models.py:57
+msgid "language"
+msgstr "언어"
+
+#: .\users\models.py:59
+msgid "currency"
+msgstr "통화"
+
+#: .\users\models.py:60
+msgid "superhost"
+msgstr "슈퍼호스트"
+
+#: .\users\models.py:64
+msgid "login_method"
+msgstr "로그인 방법"
+
+#: .\users\models.py:77
+msgid "Verify Account"
+msgstr "계정 확인"
