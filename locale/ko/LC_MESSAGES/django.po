@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 08:20+0900\n"
+"POT-Creation-Date: 2022-01-26 23:36+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,34 @@ msgstr "영어"
 #: .\templates\partials\footer.html:20 .\users\models.py:30
 msgid "Korean"
 msgstr "한국어"
+
+#: .\templates\partials\nav.html:8
+msgid "Stop hosting"
+msgstr "호스트 정지"
+
+#: .\templates\partials\nav.html:10
+msgid "Start hosting"
+msgstr "호스트 시작"
+
+#: .\templates\partials\nav.html:15
+msgid "Create Room"
+msgstr "방 생성"
+
+#: .\templates\partials\nav.html:17
+msgid "Profile"
+msgstr "프로필"
+
+#: .\templates\partials\nav.html:18
+msgid "Log out"
+msgstr "로그아웃"
+
+#: .\templates\partials\nav.html:20
+msgid "Login"
+msgstr "로그인"
+
+#: .\templates\partials\nav.html:21
+msgid "Sign up"
+msgstr "회원가입"
 
 #: .\templates\rooms\home.html:24
 #, python-format
