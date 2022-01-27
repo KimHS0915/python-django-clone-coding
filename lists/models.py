@@ -1,12 +1,12 @@
 from django.db import models
 from common.models import AbstractTimeStampedModel
 
-# Create your models here.
+
 class List(AbstractTimeStampedModel):
     """ List Model Definition """
-    
+
     name = models.CharField(max_length=80)
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         'users.User', related_name='lists', on_delete=models.CASCADE)
     rooms = models.ManyToManyField(
         'rooms.Room', related_name='lists', blank=True)
@@ -16,5 +16,5 @@ class List(AbstractTimeStampedModel):
 
     def count_rooms(self):
         return self.rooms.count()
-    
+
     count_rooms.short_description = 'Number of Rooms'

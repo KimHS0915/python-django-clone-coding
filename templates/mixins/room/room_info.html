@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n on_favourites %}
 
 <div class='flex justify-between'>
     <div class='mb-5'>
@@ -16,7 +16,12 @@
         </span>
     </a>
 </div>
-<a class='btn-link block mb-10 w-2/6' href="{% url 'lists:save-room' room.pk %}">{% trans 'Save to Favourites' %}</a>
+{% on_favourites room as on_favs_boolean %}
+{% if on_favs_boolean %}
+    <a class='block mb-10 w-2/6' href="{% url 'lists:save-room' room.pk %}">{% trans 'Remove from Favourites' %}</a>
+{% else %}
+    <a class='block mb-10 w-2/6' href="{% url 'lists:save-room' room.pk %}">{% trans 'Save to Favourites' %}</a>
+{% endif %}
 <div class="flex border-section">
     <span class='mr-5 font_light'>{{ room.room_type }}</span>
     <span class='mr-5 font_light'>{{ room.beds }} bed{{ room.beds|pluralize }}</span>

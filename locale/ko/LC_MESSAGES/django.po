@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 23:36+0900\n"
+"POT-Creation-Date: 2022-01-27 00:35+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,9 +22,13 @@ msgstr ""
 msgid "Search by City"
 msgstr "도시로 찾기"
 
-#: .\templates\mixins\room\room_info.html:19
+#: .\templates\mixins\room\room_info.html:21
+msgid "Remove from Favourites"
+msgstr "즐겨찾기에서 제거"
+
+#: .\templates\mixins\room\room_info.html:23
 msgid "Save to Favourites"
-msgstr "즐겨찾기 저장"
+msgstr "즐겨찾기에 추가"
 
 #: .\templates\partials\footer.html:7
 msgid "Privacy Policy"
