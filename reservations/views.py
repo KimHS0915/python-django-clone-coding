@@ -3,6 +3,7 @@ from django.http import Http404
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from django.views.generic import View
 from rooms.models import Room
 from reviews.forms import CreateReviewForm
@@ -14,13 +15,17 @@ class CreateError(Exception):
 
 
 def create_reservation(request, room, year, month, day):
+
+    if request.user.is_authenticated == False:
+        messages.error(request, _("Login required"))
+        return redirect(reverse('users:login'))
     try:
         date_obj = datetime.datetime(year=year, month=month, day=day)
         room = Room.objects.get(pk=room)
         models.BetweenDay.objects.get(day=date_obj, reservation__room=room)
         raise CreateError()
     except (Room.DoesNotExist, CreateError):
-        messages.error(request, "Can't Reserve That Room")
+        messages.error(request, _("Can't Reserve That Room"))
         return redirect(reverse('common:home'))
     except models.BetweenDay.DoesNotExist:
         reservation = models.Reservation.objects.create(
@@ -66,5 +71,5 @@ def edit_reservation(request, pk, verb):
         reservation.status = models.Reservation.STATUS_CANCELED
         models.BetweenDay.objects.filter(reservation=reservation).delete()
     reservation.save()
-    messages.success(request, 'Reservation Updated')
+    messages.success(request, _('Reservation Updated'))
     return redirect(reverse('reservations:detail', kwargs={'pk': reservation.pk}))

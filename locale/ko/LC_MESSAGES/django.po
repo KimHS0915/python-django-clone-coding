@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-27 00:35+0900\n"
+"POT-Creation-Date: 2022-01-27 17:57+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: .\reservations\views.py:20
+msgid "Login required"
+msgstr "로그인이 필요합니다"
+
+#: .\reservations\views.py:28
+msgid "Can't Reserve That Room"
+msgstr "예약할 수 없습니다"
+
+#: .\reservations\views.py:74
+msgid "Reservation Updated"
+msgstr "예약이 갱신되었습니다"
+
 #: .\templates\base.html:25
 msgid "Search by City"
 msgstr "도시로 찾기"
 
-#: .\templates\mixins\room\room_info.html:21
+#: .\templates\mixins\room\room_info.html:22
 msgid "Remove from Favourites"
 msgstr "즐겨찾기에서 제거"
 
-#: .\templates\mixins\room\room_info.html:23
+#: .\templates\mixins\room\room_info.html:24
 msgid "Save to Favourites"
 msgstr "즐겨찾기에 추가"
 
