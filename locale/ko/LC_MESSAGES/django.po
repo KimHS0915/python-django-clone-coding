@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-27 17:57+0900\n"
+"POT-Creation-Date: 2022-01-28 22:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,10 @@ msgstr "예약이 갱신되었습니다"
 #: .\templates\base.html:25
 msgid "Search by City"
 msgstr "도시로 찾기"
+
+#: .\templates\lists\list_detail.html:11
+msgid "Your Favourites"
+msgstr "즐겨찾기 목록"
 
 #: .\templates\mixins\room\room_info.html:22
 msgid "Remove from Favourites"
@@ -83,18 +87,22 @@ msgid "Create Room"
 msgstr "방 생성"
 
 #: .\templates\partials\nav.html:17
+msgid "Favourites"
+msgstr "즐겨찾기"
+
+#: .\templates\partials\nav.html:18
 msgid "Profile"
 msgstr "프로필"
 
-#: .\templates\partials\nav.html:18
+#: .\templates\partials\nav.html:19
 msgid "Log out"
 msgstr "로그아웃"
 
-#: .\templates\partials\nav.html:20
+#: .\templates\partials\nav.html:21
 msgid "Login"
 msgstr "로그인"
 
-#: .\templates\partials\nav.html:21
+#: .\templates\partials\nav.html:22
 msgid "Sign up"
 msgstr "회원가입"
 
