@@ -1,10 +1,19 @@
+{% load i18n %}
+
 <div class='w-1/4 mb-10 px-2 overflow-hidden'>
     <a href={% url 'rooms:detail' room.pk %}>
+        {% if fav %}
+            <a href="{% url 'lists:toggle-room' room.pk %}?action=delete">
+                <abbr title="{% trans 'Remove from Favourites' %}"><i class="fas fa-times ml-2 text-red-600"></i></abbr>
+            </a>
+        {% endif %}
         <div class='w-full h-64 bg-cover bg-center rounded-lg mb-2' style='background-image: url({{ room.first_photo }});'></div>
         <div class='flex justify-between mb-2 truncate'>
             <div class='w-4/5 overflow-hidden flex'>
                 {% if room.host.superhost %}
-                    <span class='uppercase font-medium text-xs border border-black text-black rounded py-px px-1 mr-2'>superhost</span>
+                    <span class='uppercase font-medium text-xs border border-black text-black rounded py-px px-1 mr-2'>
+                        {% trans 'superhost' %}
+                    </span>
                 {% endif %}
                 <span class='text-sm text-gray-600 block truncate'>
                     {{ room.city }},
