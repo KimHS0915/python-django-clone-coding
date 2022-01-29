@@ -7,6 +7,7 @@ from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import reverse
 from django.template.loader import render_to_string
+from common import managers as common_managers
 
 
 class User(AbstractUser):
@@ -62,6 +63,8 @@ class User(AbstractUser):
     email_secret = models.CharField(max_length=20, default="", blank=True)
     login_method = models.CharField(
         _('login_method'), max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL)
+
+    objects = common_managers.CustomModelManager()
 
     def get_absolute_url(self):
         return reverse("users:profile", kwargs={"pk": self.pk})
