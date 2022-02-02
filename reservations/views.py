@@ -4,10 +4,11 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from django.views.generic import View
+from django.views.generic import View, ListView
 from rooms.models import Room
 from reviews.forms import CreateReviewForm
 from . import models
+import reservations
 
 
 class CreateError(Exception):
@@ -73,3 +74,11 @@ def edit_reservation(request, pk, verb):
     reservation.save()
     messages.success(request, _('Reservation Updated'))
     return redirect(reverse('reservations:detail', kwargs={'pk': reservation.pk}))
+
+
+class ReservationListView(ListView):
+
+    model = models.Reservation
+    template_name = 'reservations/list.html'
+    context_object_name = 'reservations'
+    ordering = 'created'

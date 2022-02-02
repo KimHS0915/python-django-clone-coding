@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}
+    Reservation
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto pb-10">
+        {% for reservation in reservations %}
+            {% if reservation.guest == request.user %}
+                <div class='mt-2'>
+                    <a href="{% url 'reservations:detail' reservation.pk %}">{{ reservation }}</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
