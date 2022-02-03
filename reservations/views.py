@@ -78,7 +78,19 @@ def edit_reservation(request, pk, verb):
 
 class ReservationListView(ListView):
 
-    model = models.Reservation
     template_name = 'reservations/list.html'
     context_object_name = 'reservations'
     ordering = 'created'
+
+    def get_queryset(self):
+        try:
+            if self.request.session['is_hosting']:
+                reservation = models.Reservation.objects.filter(
+                    room__host=self.request.user)
+            else:
+                reservation = models.Reservation.objects.filter(
+                    guest=self.request.user)
+        except KeyError:
+            reservation = models.Reservation.objects.filter(
+                guest=self.request.user)
+        return reservation

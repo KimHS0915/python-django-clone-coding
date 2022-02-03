@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-02 21:54+0900\n"
+"POT-Creation-Date: 2022-02-04 01:41+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,15 +26,15 @@ msgstr "즐겨찾기 추가"
 msgid "Favourites removed"
 msgstr "즐겨찾기 제거"
 
-#: .\reservations\views.py:20
+#: .\reservations\views.py:21
 msgid "Login required"
 msgstr "로그인이 필요합니다"
 
-#: .\reservations\views.py:28
+#: .\reservations\views.py:29
 msgid "Can't Reserve That Room"
 msgstr "예약할 수 없습니다"
 
-#: .\reservations\views.py:74
+#: .\reservations\views.py:75
 msgid "Reservation Updated"
 msgstr "예약이 갱신되었습니다"
 
@@ -46,6 +46,20 @@ msgstr "도시로 찾기"
 msgid "Your Favourites"
 msgstr "즐겨찾기 목록"
 
+#: .\templates\mixins\reservation_card.html:10
+#: .\templates\mixins\room_card.html:15 .\users\models.py:61
+msgid "superhost"
+msgstr "슈퍼호스트"
+
+#: .\templates\mixins\reservation_card.html:29
+msgid "Reservation Info"
+msgstr "예약 정보"
+
+#: .\templates\mixins\reservation_card.html:32
+#, python-format
+msgid "Guest : %(guest)s"
+msgstr "게스트 : %(guest)s"
+
 #: .\templates\mixins\room\room_info.html:22
 #: .\templates\mixins\room_card.html:7
 msgid "Remove from Favourites"
@@ -54,10 +68,6 @@ msgstr "즐겨찾기에서 제거"
 #: .\templates\mixins\room\room_info.html:24
 msgid "Save to Favourites"
 msgstr "즐겨찾기에 추가"
-
-#: .\templates\mixins\room_card.html:15 .\users\models.py:61
-msgid "superhost"
-msgstr "슈퍼호스트"
 
 #: .\templates\partials\footer.html:7
 msgid "Privacy Policy"
@@ -122,6 +132,10 @@ msgstr "로그인"
 #: .\templates\partials\nav.html:25
 msgid "Sign up"
 msgstr "회원가입"
+
+#: .\templates\reservations\list.html:11
+msgid "Reservation History"
+msgstr "예약 내역"
 
 #: .\templates\rooms\home.html:24
 #, python-format

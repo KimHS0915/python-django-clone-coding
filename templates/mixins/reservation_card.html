@@ -1,8 +1,8 @@
 {% load i18n %}
 
-<div class='w-3/4 mb-10 px-2 overflow-hidden'>
+<div class='w-1/4 mb-10 px-3 overflow-hidden'>
     <a href="{% url 'rooms:detail' room.pk %}">
-        <div class='w-full h-32 bg-cover bg-center rounded-lg mb-2' style='background-image: url({{ room.first_photo }});'></div>
+        <div class='w-full h-48 bg-cover bg-center rounded-lg mb-2' style='background-image: url({{ room.first_photo }});'></div>
         <div class='flex justify-between mb-2 truncate'>
             <div class='w-4/5 overflow-hidden flex'>
                 {% if room.host.superhost %}
@@ -25,10 +25,15 @@
         </span>
     </a>
     <a href="{% url 'reservations:detail' reservation.pk %}">
-        <div class='mt-2 mb-2 text-center'>
-            {{ reservation.status }}
+        <div class='text-center font-medium mt-3 mb-2'>
+            {% trans 'Reservation Info' %}
         </div>
-        <div class='text-left'>{{ reservation.check_in }}</div>
-        <div class='text-right'>~ {{ reservation.check_out }}</div>
+        {% if request.session.is_hosting %}
+            <div class='text-center mb-2'>{% blocktrans with guest=reservation.guest.first_name %}Guest : {{ guest }}{% endblocktrans %}</div>
+        {% endif %}
+        <div class='text-center'>{{ reservation.check_in }} - {{ reservation.check_out }}</div>
+        <div class='mt-2 mb-2 text-center'>
+            <span class='{% if reservation.status == "pending" %} text-yellow-500 {% elif reservation.status == "canceled" %} text-red-600 {% else %} text-teal-600 {% endif %}'>{{ reservation.get_status_display }}</span>
+        </div>
     </a>
 </div>
