@@ -7,13 +7,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mx-auto pb-10">
+    <div class="container mx-auto pb-10 flex flex-col">
+        <h3 class="mb-12 text-2xl">Reservation</h3>
+        <div class="flex flex-wrap">
         {% for reservation in reservations %}
-            {% if reservation.guest == request.user %}
-                <div class='mt-2'>
-                    <a href="{% url 'reservations:detail' reservation.pk %}">{{ reservation }}</a>
-                </div>
-            {% endif %}
+            <div class='mt-2'>
+                {% if request.session.is_hosting %}
+                    {% if reservation.guest == request.user %}
+                        {% include 'mixins/reservation_card.html' with reservation=reservation room=reservation.room %}
+                    {% endif %}
+                {% else %}
+                    {% if reservation.room.host == request.user %}
+                        {% include 'mixins/reservation_card.html' with reservation=reservation room=reservation.room %}
+                    {% endif %}
+                {% endif %}
+            </div>
         {% endfor %}
+        </div>
     </div>
 {% endblock %}

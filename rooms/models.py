@@ -4,7 +4,6 @@ from django.utils import timezone
 from django_countries.fields import CountryField
 from common.models import AbstractTimeStampedModel
 from my_calendar import Calendar
-# Create your models here.
 
 
 class AbstractItem(AbstractTimeStampedModel):
