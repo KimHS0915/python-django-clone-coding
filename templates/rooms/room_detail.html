@@ -10,11 +10,7 @@
         <div class='w-1/2'>
             {% include 'mixins/room/room_info.html' with room=room %}
             <div class='mt-10'>
-                {% if room.reviews.count %}
-                    {% include 'mixins/room/room_review.html' with room=room %}
-                {% else %}
-                    <div class='font-medium text-2xl mb-5'>No reviews (yet)</div>
-                {% endif %}
+                {% include 'mixins/room/room_review.html' with room=room %}
             </div>
         </div>
         <div class='w-1/3'>

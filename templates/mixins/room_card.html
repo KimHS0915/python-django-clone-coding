@@ -1,10 +1,28 @@
-{% load i18n %}
+{% load i18n on_favourites %}
 
 <div class='w-1/4 mb-10 px-2 overflow-hidden'>
     <a href={% url 'rooms:detail' room.pk %}>
         <div class='w-full h-64 bg-cover bg-center rounded-lg mb-2' style='background-image: url({{ room.first_photo }});'></div>
         <div class='flex justify-between mb-2 truncate'>
             <div class='w-4/5 overflow-hidden flex'>
+                <span>
+                    {% if user.is_authenticated %}
+                        {% on_favourites room as on_favs_boolean %}
+                        {% if on_favs_boolean %}
+                            <a href="{% url 'lists:toggle-room' room.pk %}?action=remove{{ fav }}">
+                                <abbr title="{% trans 'Remove from Favourites' %}">
+                                    <i class="fa fa-heart mr-3 text-red-600"></i>
+                                </abbr>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'lists:toggle-room' room.pk %}?action=add{{ fav }}">
+                                <abbr title="{% trans 'Add to Favourites' %}">
+                                    <i class="fa fa-heart mr-3 text-gray-300"></i>
+                                </abbr>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </span>
                 {% if room.host.superhost %}
                     <span class='uppercase font-medium text-xs border border-black text-black rounded py-px px-1 mr-2'>
                         {% trans 'superhost' %}

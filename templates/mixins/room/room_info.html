@@ -19,9 +19,9 @@
 {% if user.is_authenticated %}
     {% on_favourites room as on_favs_boolean %}
     {% if on_favs_boolean %}
-        <a class='block mb-10 w-2/6 text-teal-600 font-semibold' href="{% url 'lists:toggle-room' room.pk %}?action=remove">{% trans 'Remove from Favourites' %}</a>
+        <a class='block mb-10 w-2/6 text-teal-600 font-semibold' href="{% url 'lists:toggle-room' room.pk %}?action=remove1">{% trans 'Remove from Favourites' %}</a>
     {% else %}
-        <a class='block mb-10 w-2/6 text-teal-600 font-semibold' href="{% url 'lists:toggle-room' room.pk %}?action=add">{% trans 'Save to Favourites' %}</a>
+        <a class='block mb-10 w-2/6 text-teal-600 font-semibold' href="{% url 'lists:toggle-room' room.pk %}?action=add1">{% trans 'Save to Favourites' %}</a>
     {% endif %}
 {% endif %}
 <div class="flex border-section">
