@@ -283,3 +283,11 @@ def switch_language(request):
     if lang is not None:
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
     return response
+
+
+def switch_currency(request):
+    currency = request.GET.get('currency', None)
+    response = HttpResponse(status=200)
+    if currency is not None:
+        response.set_cookie(settings.CURRENCY_COOKIE_NAME, currency)
+    return response

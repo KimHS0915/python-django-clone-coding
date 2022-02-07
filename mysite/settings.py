@@ -170,3 +170,7 @@ LOGIN_URL = '/users/login/'
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 LANGUAGE_COOKIE_NAME = 'django_language'
+
+# Currency
+
+CURRENCY_COOKIE_NAME = 'django_currency'

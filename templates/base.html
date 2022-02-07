@@ -42,6 +42,12 @@
             fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(() => window.location.reload());
         }
         langSelector.addEventListener('change', handleLangChange);
+        const currencySelector = document.getElementById('currency-selector');
+        const handleCurrencyChange = () => {
+            const selected = currencySelector.value;
+            fetch(`{% url 'users:switch-currency' %}?currency=${selected}`).then(() => window.location.reload());
+        }
+        currencySelector.addEventListener('change', handleCurrencyChange);
     </script>
 </body>
 </html>

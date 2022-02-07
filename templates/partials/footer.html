@@ -20,6 +20,14 @@
                     {% trans 'Korean' %}
                 </option>
             </select>
+            <select class='w-2/5 text-gray-800 ml-2' id='currency-selector'>
+                <option value='en' {% if request.COOKIES.django_currency == 'en' %} selected {% endif %}>
+                    {% trans 'USD' %}
+                </option>
+                <option value='ko' {% if request.COOKIES.django_currency == 'ko' %} selected {% endif %}>
+                    {% trans 'KRW' %}
+                </option>
+            </select>
         </div>
     </div>
 </footer>
