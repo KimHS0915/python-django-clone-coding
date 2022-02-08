@@ -16,7 +16,7 @@
                             </a>
                         {% else %}
                             <a href="{% url 'lists:toggle-room' room.pk %}?action=add{{ fav }}">
-                                <abbr title="{% trans 'Add to Favourites' %}">
+                                <abbr title="{% trans 'Save to Favourites' %}">
                                     <i class="fa fa-heart mr-3 text-gray-300"></i>
                                 </abbr>
                             </a>
@@ -41,8 +41,19 @@
                 {% endif %}
             </div>
         </div>
-        <span class='text-black w-11/12 block truncate'>
-            {{ room.name }}
-        </span>
+        <div class='flex justify-between mb-2 truncate'>
+            <div class='w-4/5 overflow-hidden flex'>
+                <span class='text-black w-11/12 block truncate'>
+                    {{ room.name }}
+                </span>
+            </div>
+            <div class='text-sm flex items-center font-bold'>
+                {% if request.COOKIES.django_currency == 'ko' %}
+                    ₩{{ room.get_krw }}
+                {% else %}
+                    ${{ room.price }}
+                {% endif %}
+            </div>
+        </div>
     </a>
 </div>

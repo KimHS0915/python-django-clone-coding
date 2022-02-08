@@ -24,6 +24,16 @@
         <a class='block mb-10 w-2/6 text-teal-600 font-semibold' href="{% url 'lists:toggle-room' room.pk %}?action=add1">{% trans 'Save to Favourites' %}</a>
     {% endif %}
 {% endif %}
+<div class='flex justify-end'>
+    <span class='font-bold'>
+        {% if request.COOKIES.django_currency == 'ko' %}
+            ₩{{ room.get_krw }}
+        {% else %}
+            ${{ room.price }}
+        {% endif %}
+    </span>
+    <span class='ml-1'>{% trans '/ night' %}</span>
+</div>
 <div class="flex border-section">
     <span class='mr-5 font_light'>{{ room.room_type }}</span>
     <span class='mr-5 font_light'>{{ room.beds }} bed{{ room.beds|pluralize }}</span>

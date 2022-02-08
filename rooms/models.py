@@ -123,3 +123,6 @@ class Room(AbstractTimeStampedModel):
         else:
             next_month = Calendar(now.year, now.month + 1)
         return [this_month, next_month]
+
+    def get_krw(self):
+        return int(self.price * 1198.41)
