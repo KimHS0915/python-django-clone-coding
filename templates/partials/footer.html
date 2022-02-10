@@ -18,9 +18,9 @@
                 </span>
                 <span class="mr-5">
                     {% if LANGUAGE_CODE == "en" %}
-                        English
+                        {% trans 'English' %} 
                     {% elif LANGUAGE_CODE == "ko" %}
-                        Korean
+                        {% trans 'Korean' %}
                     {% endif %}
                 </span>
             </button>
@@ -28,86 +28,62 @@
                 <span class="mr-2">
                     {% if request.COOKIES.django_currency == "en" %}
                         $ 
-                    {% elif request.COOKIES.django_currency == "ko" %}
+                    {% else %}
                         ₩
                     {% endif %}
                 </span>
                 <span class="">
                     {% if request.COOKIES.django_currency == "en" %}
-                        USD
-                    {% elif request.COOKIES.django_currency == "ko" %}
-                        KRW
+                        {% trans 'USD' %}
+                    {% else %}
+                        {% trans 'KRW' %}
                     {% endif %}
                 </span>
             </button>
         </div>
     </div>
 </footer>
-<div class='fixed hidden inset-0 bg-opacity-75 overflow-y-auto h-full w-full' id='locale-modal'>
+<div class='fixed hidden inset-0 overflow-y-auto h-full w-full' id='locale-modal'>
     <div class='relative max-w-xl mx-auto my-25vh border w-96 shadow-lg rounded-lg bg-white'>
         <button class='focus:outline-none text-black mt-5 mb-5 ml-5' id='locale-close'><i class="fas fa-times ml-2"></i></button>
         <div class='text-left border-t'>
-            <div class='mb-5 mt-5 ml-5 text-2xl text-black font-medium'>Choose a language and region</div>
+            <div class='mb-5 mt-5 ml-5 text-2xl text-black font-medium'>{% trans 'Choose a language and region' %}</div>
             <div class='ml-5 mb-5 text-gray-800'>
                 <span class="mr-5">
                     <button class='p-2 focus:outline-none rounded-lg hover:bg-gray-200 {% if LANGUAGE_CODE == "en" %} border-gray-600 border {% endif %}' id='eng-btn'>
-                        <div class='text-gray-600'>English</div>
-                        <div class='text-gray-500'>United States</div>
+                        <div class='text-gray-600'>{% trans 'English' %}</div>
+                        <div class='text-gray-500'>{% trans 'United States' %}</div>
                     </button>
                 </span>
                 <span class="mr-5">
                     <button class='p-2 focus:outline-none rounded-lg hover:bg-gray-200 {% if LANGUAGE_CODE == "ko" %} border-gray-600 border {% endif %}' id='kor-btn'>
-                        <div class='text-gray-600'>Korean</div>
-                        <div class='text-gray-500'>South Korea</div>
+                        <div class='text-gray-600'>{% trans 'Korean' %}</div>
+                        <div class='text-gray-500'>{% trans 'South Korea' %}</div>
                     </button>
                 </span>
             </div>
         </div>
     </div>
 </div>
-<div class='fixed hidden inset-0 bg-opacity-75 overflow-y-auto h-full w-full' id='currency-modal'>
+<div class='fixed hidden inset-0 overflow-y-auto h-full w-full' id='currency-modal'>
     <div class='relative max-w-xl mx-auto my-25vh border w-96 shadow-lg rounded-lg bg-white'>
         <button class='focus:outline-none text-black mt-5 mb-5 ml-5' id='currency-close'><i class="fas fa-times ml-2"></i></button>
         <div class='text-left border-t'>
-            <div class='mb-5 mt-5 ml-5 text-2xl text-black font-medium'>Choose a currency</div>
+            <div class='mb-5 mt-5 ml-5 text-2xl text-black font-medium'>{% trans 'Choose a Currency' %}</div>
             <div class='ml-5 mb-5 text-gray-800'>
                 <span class="mr-5">
-                    <button class='p-2 focus:outline-none rounded-lg hover:bg-gray-200 {% if LANGUAGE_CODE == "en" %} border-gray-600 border {% endif %}' id='usd-btn'>
-                        <div class='text-gray-600'>United States dollar</div>
-                        <div class='text-gray-500'>USD - $</div>
+                    <button class='p-2 focus:outline-none rounded-lg hover:bg-gray-200 {% if request.COOKIES.django_currency == "en" %} border-gray-600 border {% endif %}' id='usd-btn'>
+                        <div class='text-gray-600'>{% trans 'United States dollar' %}</div>
+                        <div class='text-gray-500'>{% trans 'USD' %} - $</div>
                     </button>
                 </span>
                 <span class="mr-5">
-                    <button class='p-2 focus:outline-none rounded-lg hover:bg-gray-200 {% if LANGUAGE_CODE == "ko" %} border-gray-600 border {% endif %}' id='krw-btn'>
-                        <div class='text-gray-600'>South Korean won</div>
-                        <div class='text-gray-500'>KRW - ₩</div>
+                    <button class='p-2 focus:outline-none rounded-lg hover:bg-gray-200 {% if request.COOKIES.django_currency == "ko" %} border-gray-600 border {% endif %}' id='krw-btn'>
+                        <div class='text-gray-600'>{% trans 'South Korean won' %}</div>
+                        <div class='text-gray-500'>{% trans 'KRW' %} - ₩</div>
                     </button>
                 </span>
             </div>
         </div>
     </div>
 </div>
-<script>
-    const locale_modal = document.getElementById('locale-modal');
-    const locale_btn = document.getElementById('locale-btn');
-    const eng_btn = document.getElementById('eng-btn');
-    const kor_btn = document.getElementById('kor-btn');
-    const locale_close = document.getElementById('locale-close');
-    const currency_modal = document.getElementById('currency-modal');
-    const currency_btn = document.getElementById('currency-btn');
-    const usd_btn = document.getElementById('usd-btn');
-    const krw_btn = document.getElementById('krw-btn');
-    const currency_close = document.getElementById('currency-close');
-    locale_btn.onclick = () => {
-        locale_modal.style.display = 'block';
-    }
-    locale_close.onclick = () => {
-        locale_modal.style.display = '';
-    }
-    currency_btn.onclick = () => {
-        currency_modal.style.display = 'block';
-    }
-    currency_close.onclick = () => {
-        currency_modal.style.display = '';
-    }
-</script>
