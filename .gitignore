@@ -272,3 +272,8 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
