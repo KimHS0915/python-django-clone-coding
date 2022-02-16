@@ -5,3 +5,5 @@ cd /var/app/staging
 
 python manage.py makemigrations
 python manage.py migrate
+python manage.py makemessages --locale=ko
+python manage.py compilemessages
