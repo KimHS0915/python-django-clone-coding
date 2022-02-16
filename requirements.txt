@@ -31,3 +31,4 @@ toml==0.10.2
 toposort==1.7
 urllib3==1.26.7
 wcwidth==0.1.9
+sentry-sdk==1.5.5
