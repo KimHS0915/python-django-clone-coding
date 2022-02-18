@@ -46,6 +46,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'django_countries',
     'django_seed',
+    'storages',
 ]
 
 PROJECT_APPS = [
@@ -189,9 +190,20 @@ LANGUAGE_COOKIE_NAME = 'django_language'
 
 CURRENCY_COOKIE_NAME = 'django_currency'
 
-# Sentry
 
 if not DEBUG:
+
+    DEFAULT_FILE_STORAGE = 'mysite.custom_storages.UploadStorage'
+    STATICFILES_STORAGE = 'mysite.custom_storages.StaticStorage'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static'
+
+    # Sentry
+
     sentry_sdk.init(
         dsn=os.environ.get('SENTRY_URL'),
         integrations=[DjangoIntegration()],
